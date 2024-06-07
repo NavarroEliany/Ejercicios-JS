@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Formulario</title>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.2/sweetalert.min.css">
+<style>
+    body {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        margin: 0;
+    }
+    #formulario {
+        text-align: center;
+    }
+    input[type="text"] {
+        margin: 5px;
+        padding: 5px;
+    }
+    #impresion {
+        margin-top: 20px;
+        font-size: 1.5em;
+    }
+</style>
+</head>
+<body>
+<div id="formulario">
+    <input type="text" id="nombre" placeholder="Nombre">
+    <input type="text" id="apellido" placeholder="Apellido">
+    <input type="text" id="texto1" placeholder="Texto 1">
+    <input type="text" id="texto2" placeholder="Texto 2">
+    <br>
+    <button onclick="enviar()">Enviar</button>
+    <button onclick="limpiar()">Limpiar</button>
+    <div id="impresion"></div>
+</div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.2/sweetalert.min.js"></script>
+<script>
+    function enviar() {
+        var nombre = document.getElementById('nombre').value.trim();
+        var apellido = document.getElementById('apellido').value.trim();
+        var texto1 = document.getElementById('texto1').value.trim();
+        var texto2 = document.getElementById('texto2').value.trim();
+
+        if (nombre.length === 0 || apellido.length === 0 || texto1.length < 5 || texto2.length < 5) {
+            alert('Por favor, complete todos los campos y asegúrese de que los textos tengan al menos 5 caracteres.');
+            return;
+        }
+
+        var nombreCompleto = nombre.toUpperCase() + ' ' + apellido.toUpperCase();
+        swal('Nombre Completo', nombreCompleto);
+
+        var textoCompleto = nombreCompleto.split('').join(' ');
+        document.getElementById('impresion').textContent = textoCompleto;
+
+        var conteoCaracteres = textoCompleto.replace(/\s/g, '').length;
+        document.getElementById('impresion').innerHTML += '<br>Total de caracteres: ' + conteoCaracteres;
+    }
+
+    function limpiar() {
+        document.getElementById('nombre').value = '';
+        document.getElementById('apellido').value = '';
+        document.getElementById('texto1').value = '';
+        document.getElementById('texto2').value = '';
+        document.getElementById('impresion').textContent = '';
+    }
+</script>
+</body>
+</html>
